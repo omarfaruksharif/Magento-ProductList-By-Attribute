@@ -43,10 +43,10 @@ class Omar_ProductByAttribute_Block_List extends Mage_Catalog_Block_Product_List
         }
 
         if (is_null($this->_itemCollection)) {
-            // Get Products collection Using our Products Model
+            /* Get Products collection Using our Products Model */
             //$this->_itemCollection = Mage::getModel('omar_productbyattribute/products')->getItemsCollection( $this->getAttr(), $this->getAttrValue() );
             
-            // Get Products collection Using Magento Core Products Model
+            /* Get Products collection Using Magento Core Products Model */
             $this->_itemCollection = $this->getProductCollection();
         }
 
@@ -77,8 +77,10 @@ class Omar_ProductByAttribute_Block_List extends Mage_Catalog_Block_Product_List
 
             $collection = Mage::getResourceModel('catalog/product_collection');
             
-            // If there are no records returning though there are products in the 
-            // store, try commenting the following line.
+            /*
+             *  If there are no records returning though there are products
+             *  in the store, try commenting the following line.
+             */
             $collection->setVisibility(Mage::getSingleton('catalog/product_visibility')->getVisibleInCatalogIds());
 
             $collection = $this->_addProductAttributesAndPrices($collection)
