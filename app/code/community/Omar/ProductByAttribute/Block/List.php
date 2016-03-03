@@ -10,7 +10,12 @@ class Omar_ProductByAttribute_Block_List extends Mage_Catalog_Block_Product_List
 
     public function __construct() {
         parent::__construct();
-
+        
+        /*
+         *  We are recieving the attribute code value from URL in this 
+         *  format: http://example.com/prodattr/attribute/manufacturer/6
+         *  Here, "manufacturer" is the attribute code and "6" is the attribute value
+         */
         $params = $this->getRequest()->getParams();
 
         if(!empty($params)) {
@@ -38,7 +43,10 @@ class Omar_ProductByAttribute_Block_List extends Mage_Catalog_Block_Product_List
         }
 
         if (is_null($this->_itemCollection)) {
+            // Get Products collection Using our Products Model
             //$this->_itemCollection = Mage::getModel('omar_productbyattribute/products')->getItemsCollection( $this->getAttr(), $this->getAttrValue() );
+            
+            // Get Products collection Using Magento Core Products Model
             $this->_itemCollection = $this->getProductCollection();
         }
 
@@ -68,15 +76,18 @@ class Omar_ProductByAttribute_Block_List extends Mage_Catalog_Block_Product_List
             }
 
             $collection = Mage::getResourceModel('catalog/product_collection');
-            //$collection->setVisibility(Mage::getSingleton('catalog/product_visibility')->getVisibleInCatalogIds());
+            
+            // If there are no records returning though there are products in the 
+            // store, try commenting the following line.
+            $collection->setVisibility(Mage::getSingleton('catalog/product_visibility')->getVisibleInCatalogIds());
 
             $collection = $this->_addProductAttributesAndPrices($collection)
             //$collection
                 ->addStoreFilter()
                 ->addAttributeToFilter( $this->getAttr(),  $this->getAttrValue() )
                 ->addAttributeToSort('news_from_date', 'desc')
-                ->setPageSize($this->get_prod_count())
-                ->setCurPage($this->get_cur_page())
+                ->setPageSize($this->getProductsToDisplayPerPage())
+                ->setCurPage($this->getCurrentPageNumber())
             ;
 
             $this->setProductCollection($collection);
@@ -84,16 +95,17 @@ class Omar_ProductByAttribute_Block_List extends Mage_Catalog_Block_Product_List
             return $collection;
         } catch(Exception $e) {
             //header('Localtion: /');
+            echo $e->getMessage();
         }
 
     }
 
 
-    public function get_prod_count() {
+    public function getProductsToDisplayPerPage() {
         return 12;
     }
 
-    public function get_cur_page() {
+    public function getCurrentPageNumber() {
         return (isset($_REQUEST['p'])) ? intval($_REQUEST['p']) : 1;
     }
 
