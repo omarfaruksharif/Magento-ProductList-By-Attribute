@@ -13,7 +13,11 @@ class Omar_ProductByAttribute_AttributeController extends Mage_Core_Controller_F
         $this->loadLayout();
 
         $this->_block = Mage::getBlockSingleton('omar_productbyattribute/list');
-
+        
+        /*
+         *  If there is no attribute and attribute value passed to the URL,
+         *  we are reditecting the user to Home Page.
+         */
         if( empty( $this->_block->getAttr() ) || empty( $this->_block->getAttrValue() ) ) {
             return Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
         }
