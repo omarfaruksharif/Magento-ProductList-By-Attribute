@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <omar_productbyattribute>
+            <version>0.0.2</version>
+        </omar_productbyattribute>
+    </modules>
+    <frontend>
+        <routers>
+            <prodattr>
+                <use>standard</use>
+                <args>
+                    <module>Omar_ProductByAttribute</module>
+                    <frontName>prodattr</frontName>
+                </args>
+            </prodattr>
+        </routers>
+        <layout>
+            <updates>
+                <prodattr>
+                    <file>prodattr.xml</file>
+                </prodattr>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <blocks>
+            <omar_productbyattribute>
+                <class>Omar_ProductByAttribute_Block</class>
+            </omar_productbyattribute>
+            <catalog>
+                <rewrite>
+                    <product_view_options_type_select>Omar_ProductByAttribute_Block_Catalog_Product_View_Options_Type_Select</product_view_options_type_select>
+                </rewrite>
+            </catalog>
+        </blocks>
+        
+        <helpers>
+            <omar_productbyattribute>
+                <class>Omar_ProductByAttribute_Helper</class>
+            </omar_productbyattribute>
+        </helpers>
+        <models>
+            <omar_productbyattribute>
+                <class>Omar_ProductByAttribute_Model</class>
+            </omar_productbyattribute>
+        </models>
+    </global>
+</config>
