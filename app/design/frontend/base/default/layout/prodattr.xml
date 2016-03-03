@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+    <prodattr_attribute_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="omar_productbyattribute/list" name="prodattr_attribute" template="omar/prodattr/attribute.phtml">
+                <action method="setColumnCount"><column_count>2</column_count></action>
+                <block type="catalog/product_list_toolbar" name="product_list_toolbar" as="toolbar" template="catalog/product/list/toolbar.phtml">
+                    <block type="page/html_pager" name="product_list_toolbar_pager" />
+                    <action method="setDefaultGridPerPage"><limit>12</limit></action>
+                    <action method="addPagerLimit"><mode>grid</mode><limit>12</limit></action>
+                    <action method="addPagerLimit"><mode>grid</mode><limit>24</limit></action>
+                    <action method="addPagerLimit"><mode>grid</mode><limit>36</limit></action>
+                    <action method="addPagerLimit"><mode>grid</mode><limit>48</limit></action>
+                    <action method="addPagerLimit" translate="label"><mode>grid</mode><limit>all</limit><label>All</label></action>
+                </block>
+                <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>6</count></action>
+                <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+            </block>
+        </reference>
+    </prodattr_attribute_index>
+</layout>
